@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-labelledby="t2 d2">
+  <title id="t2">Concept illustration: the serving counter at Mini Alley Pally</title>
+  <desc id="d2">A code-drawn concept illustration, not a photograph. A closer view of a small serving hatch with a counter, a blank board, and one table with two chairs.</desc>
+
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFCF7"/>
+      <stop offset="1" stop-color="#EDE0CF"/>
+    </linearGradient>
+    <linearGradient id="hatch" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3A3129"/>
+      <stop offset="1" stop-color="#5E4E3C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- shed wall -->
+  <rect width="1200" height="900" fill="url(#wall)"/>
+  <g stroke="#DCCBB2" stroke-width="4">
+    <line x1="120" y1="0" x2="120" y2="900"/><line x1="240" y1="0" x2="240" y2="900"/>
+    <line x1="960" y1="0" x2="960" y2="900"/><line x1="1080" y1="0" x2="1080" y2="900"/>
+  </g>
+
+  <!-- awning edge across the top -->
+  <path d="M0 0h1200v96l-40 34H40L0 96z" fill="#8E2106" opacity="0.92"/>
+  <g fill="#F7F1EA" opacity="0.5">
+    <rect x="60" y="0" width="60" height="130"/><rect x="220" y="0" width="60" height="130"/>
+    <rect x="380" y="0" width="60" height="130"/><rect x="540" y="0" width="60" height="130"/>
+    <rect x="700" y="0" width="60" height="130"/><rect x="860" y="0" width="60" height="130"/>
+    <rect x="1020" y="0" width="60" height="130"/>
+  </g>
+
+  <!-- serving hatch -->
+  <rect x="300" y="186" width="600" height="300" rx="8" fill="#2F2A22"/>
+  <rect x="316" y="202" width="568" height="268" rx="5" fill="url(#hatch)"/>
+
+  <!-- what little equipment there is: a hot-water boiler, a jug, cups. No food shown:
+       nothing on Mini's menu has been confirmed. -->
+  <g>
+    <rect x="392" y="330" width="96" height="112" rx="8" fill="#CFC6B6"/>
+    <rect x="406" y="346" width="68" height="34" rx="4" fill="#8E867A"/>
+    <rect x="430" y="442" width="20" height="14" fill="#A49B8C"/>
+    <rect x="528" y="372" width="56" height="70" rx="6" fill="#E2D9C8"/>
+    <path d="M584 388h20v30h-20z" fill="#E2D9C8"/>
+    <g fill="#F7F1EA" stroke="#9C8A72" stroke-width="3">
+      <rect x="630" y="404" width="40" height="38" rx="5"/>
+      <rect x="686" y="404" width="40" height="38" rx="5"/>
+      <rect x="742" y="404" width="40" height="38" rx="5"/>
+    </g>
+  </g>
+
+  <!-- counter slab -->
+  <rect x="268" y="486" width="664" height="30" rx="10" fill="#4A2218"/>
+  <rect x="268" y="516" width="664" height="12" rx="4" fill="#351A12"/>
+
+  <!-- blank board. Left blank on purpose: no menu has been confirmed for Mini. -->
+  <g>
+    <rect x="936" y="212" width="212" height="268" rx="10" fill="#2E2A24" stroke="#4A2218" stroke-width="8"/>
+    <g stroke="#F4F0E6" stroke-width="7" opacity="0.28" stroke-linecap="round">
+      <line x1="972" y1="270" x2="1112" y2="270"/>
+      <line x1="972" y1="320" x2="1092" y2="320"/>
+      <line x1="972" y1="370" x2="1112" y2="370"/>
+      <line x1="972" y1="420" x2="1060" y2="420"/>
+    </g>
+    <text x="1042" y="246" text-anchor="middle" font-family="Inter, Arial, Helvetica, sans-serif" font-size="17" letter-spacing="1.4" fill="#F7F1EA" opacity="0.75">MENU TBC</text>
+  </g>
+
+  <!-- small hanging sign -->
+  <g>
+    <line x1="140" y1="130" x2="140" y2="196" stroke="#4A2218" stroke-width="6"/>
+    <rect x="52" y="196" width="178" height="62" rx="8" fill="#F7F1EA" stroke="#4A2218" stroke-width="5"/>
+    <text x="141" y="236" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#4A2218">Mini</text>
+  </g>
+
+  <!-- floor -->
+  <rect y="690" width="1200" height="210" fill="#D9CDB8"/>
+  <rect y="690" width="1200" height="12" fill="#C3B59C"/>
+
+  <!-- one round table, two chairs. Casual stop, not a dining room. -->
+  <g stroke="#4A2218" stroke-width="9" stroke-linecap="round" fill="none">
+    <ellipse cx="440" cy="712" rx="152" ry="38" fill="#F7F1EA" stroke="#4A2218"/>
+    <line x1="440" y1="750" x2="440" y2="846"/>
+    <line x1="382" y1="852" x2="498" y2="852"/>
+    <g>
+      <line x1="196" y1="764" x2="196" y2="856"/><line x1="152" y1="764" x2="246" y2="764"/>
+      <line x1="152" y1="764" x2="152" y2="672"/><line x1="152" y1="680" x2="246" y2="680"/>
+    </g>
+    <g>
+      <line x1="690" y1="764" x2="690" y2="856"/><line x1="642" y1="764" x2="736" y2="764"/>
+      <line x1="736" y1="764" x2="736" y2="672"/><line x1="642" y1="680" x2="736" y2="680"/>
+    </g>
+  </g>
+  <g fill="#F7F1EA" stroke="#9C8A72" stroke-width="4">
+    <rect x="392" y="676" width="38" height="34" rx="5"/>
+    <rect x="452" y="676" width="38" height="34" rx="5"/>
+  </g>
+
+  <!-- potted plant -->
+  <g>
+    <path d="M1004 846l16-96h92l16 96z" fill="#9C5A3C"/>
+    <g fill="#4C6943">
+      <circle cx="1030" cy="726" r="34"/><circle cx="1066" cy="690" r="30"/><circle cx="1104" cy="724" r="36"/>
+    </g>
+  </g>
+
+  <!-- integrity label -->
+  <g>
+    <rect x="24" y="826" width="498" height="46" rx="23" fill="#2C2416" opacity="0.88"/>
+    <text x="48" y="855" font-family="Inter, Arial, Helvetica, sans-serif" font-size="19" letter-spacing="1.1" fill="#FFFFFF">CONCEPT ILLUSTRATION — NOT A PHOTOGRAPH</text>
+  </g>
+</svg>

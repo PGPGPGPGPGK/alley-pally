@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="t d">
+  <title id="t">Concept illustration: Mini Alley Pally kiosk beside a pickleball court</title>
+  <desc id="d">A code-drawn concept illustration, not a photograph. A small stationary serving shed with an awning and two outdoor tables, set at the edge of a pickleball court.</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#DCE6EA"/>
+      <stop offset="1" stop-color="#F2EBE1"/>
+    </linearGradient>
+    <linearGradient id="court" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5E7F86"/>
+      <stop offset="1" stop-color="#46656C"/>
+    </linearGradient>
+    <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5A2E20"/>
+      <stop offset="1" stop-color="#402016"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFCF7"/>
+      <stop offset="1" stop-color="#EFE2D2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ground and sky -->
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <rect y="500" width="1600" height="400" fill="#E6DCCB"/>
+
+  <!-- hedge line, the "alley" planting -->
+  <g fill="#4C6943">
+    <circle cx="90" cy="470" r="62"/><circle cx="180" cy="452" r="74"/><circle cx="276" cy="474" r="58"/>
+    <circle cx="372" cy="456" r="70"/><circle cx="470" cy="476" r="56"/><circle cx="566" cy="458" r="68"/>
+    <circle cx="664" cy="474" r="58"/><circle cx="762" cy="456" r="72"/><circle cx="860" cy="474" r="58"/>
+    <circle cx="958" cy="460" r="66"/><circle cx="1056" cy="476" r="56"/><circle cx="1154" cy="458" r="70"/>
+    <circle cx="1252" cy="474" r="58"/><circle cx="1350" cy="456" r="72"/><circle cx="1448" cy="472" r="60"/>
+    <circle cx="1546" cy="458" r="68"/>
+  </g>
+  <rect y="500" width="1600" height="26" fill="#3F5438"/>
+
+  <!-- two trees behind the kiosk -->
+  <g>
+    <rect x="1246" y="330" width="16" height="180" fill="#5A4030"/>
+    <circle cx="1254" cy="306" r="78" fill="#55774B"/>
+    <circle cx="1206" cy="344" r="54" fill="#4C6943"/>
+    <circle cx="1304" cy="342" r="58" fill="#4C6943"/>
+    <rect x="112" y="356" width="14" height="156" fill="#5A4030"/>
+    <circle cx="119" cy="334" r="66" fill="#55774B"/>
+  </g>
+
+  <!-- pickleball court, drawn in perspective -->
+  <polygon points="0,900 1600,900 1340,560 260,560" fill="url(#court)"/>
+  <g stroke="#F4F0E6" stroke-width="5" fill="none" opacity="0.92">
+    <polygon points="92,860 1508,860 1310,586 290,586"/>
+    <line x1="800" y1="586" x2="800" y2="860"/>
+    <line x1="360" y1="704" x2="1240" y2="704"/>
+  </g>
+  <!-- net -->
+  <g>
+    <rect x="356" y="664" width="8" height="64" fill="#3B3A33"/>
+    <rect x="1236" y="664" width="8" height="64" fill="#3B3A33"/>
+    <rect x="360" y="668" width="880" height="42" fill="#2F2E29" opacity="0.5"/>
+    <rect x="360" y="664" width="880" height="7" fill="#F4F0E6"/>
+  </g>
+
+  <!-- two abstract players, no faces -->
+  <g fill="#30271E" opacity="0.78">
+    <circle cx="570" cy="620" r="17"/>
+    <path d="M553 642h34l10 70h-18l-6-34-6 34h-18z"/>
+    <rect x="588" y="632" width="46" height="9" rx="4" transform="rotate(-24 588 632)"/>
+    <circle cx="1048" cy="612" r="17"/>
+    <path d="M1031 634h34l10 70h-18l-6-34-6 34h-18z"/>
+    <rect x="986" y="628" width="46" height="9" rx="4" transform="rotate(22 1032 632)"/>
+  </g>
+  <circle cx="820" cy="596" r="11" fill="#E8D9A8" stroke="#A8862F" stroke-width="3"/>
+
+  <!-- ===== the kiosk: a small stationary shed, deliberately modest ===== -->
+  <g>
+    <!-- shadow -->
+    <ellipse cx="1140" cy="636" rx="212" ry="22" fill="#2F241A" opacity="0.16"/>
+
+    <!-- body -->
+    <rect x="968" y="318" width="344" height="306" rx="8" fill="url(#shade)" stroke="#CBB89F" stroke-width="3"/>
+    <!-- vertical plank lines -->
+    <g stroke="#DCCBB2" stroke-width="3">
+      <line x1="1012" y1="330" x2="1012" y2="618"/><line x1="1056" y1="330" x2="1056" y2="618"/>
+      <line x1="1224" y1="330" x2="1224" y2="618"/><line x1="1268" y1="330" x2="1268" y2="618"/>
+    </g>
+
+    <!-- pitched roof -->
+    <polygon points="938,322 1140,214 1342,322" fill="url(#roof)"/>
+    <rect x="930" y="316" width="420" height="20" rx="8" fill="#351A12"/>
+
+    <!-- serving hatch -->
+    <rect x="1040" y="372" width="200" height="132" rx="6" fill="#2F2A22"/>
+    <rect x="1052" y="384" width="176" height="108" rx="4" fill="#6E5B45"/>
+    <!-- counter shelf -->
+    <rect x="1024" y="504" width="232" height="16" rx="6" fill="#4A2218"/>
+    <!-- a kettle and two cups, the whole of the equipment -->
+    <rect x="1074" y="462" width="34" height="30" rx="4" fill="#D8CFC0"/>
+    <rect x="1124" y="472" width="18" height="20" rx="3" fill="#F4EDE1"/>
+    <rect x="1152" y="472" width="18" height="20" rx="3" fill="#F4EDE1"/>
+
+    <!-- awning over the hatch -->
+    <path d="M1014 372h252l34 58H980z" fill="#8E2106" opacity="0.92"/>
+    <g fill="#F7F1EA" opacity="0.5">
+      <rect x="1030" y="372" width="28" height="58"/>
+      <rect x="1098" y="372" width="28" height="58"/>
+      <rect x="1166" y="372" width="28" height="58"/>
+      <rect x="1234" y="372" width="28" height="58"/>
+    </g>
+
+    <!-- sign board. The name only; nothing priced, nothing offered. -->
+    <rect x="1022" y="250" width="236" height="52" rx="8" fill="#F7F1EA" stroke="#4A2218" stroke-width="3"/>
+    <text x="1140" y="285" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#4A2218">Mini Alley Pally</text>
+
+    <!-- small side door -->
+    <rect x="1276" y="430" width="30" height="190" rx="4" fill="#DCCBB2" stroke="#C0AB91" stroke-width="2"/>
+
+    <!-- potted plant beside the shed -->
+    <path d="M1332 620l12-56h44l12 56z" fill="#9C5A3C"/>
+    <g fill="#4C6943">
+      <circle cx="1354" cy="552" r="22"/><circle cx="1366" cy="524" r="20"/><circle cx="1384" cy="550" r="24"/>
+    </g>
+  </g>
+
+  <!-- ===== modest outdoor seating: two tables, four chairs ===== -->
+  <g stroke="#4A2218" stroke-width="7" stroke-linecap="round" fill="none">
+    <!-- table one -->
+    <ellipse cx="420" cy="572" rx="86" ry="20" fill="#F7F1EA" stroke="#4A2218"/>
+    <line x1="420" y1="592" x2="420" y2="660"/><line x1="388" y1="664" x2="452" y2="664"/>
+    <!-- chairs -->
+    <g><line x1="300" y1="604" x2="300" y2="664"/><line x1="276" y1="604" x2="330" y2="604"/><line x1="276" y1="604" x2="276" y2="556"/></g>
+    <g><line x1="540" y1="604" x2="540" y2="664"/><line x1="512" y1="604" x2="566" y2="604"/><line x1="566" y1="604" x2="566" y2="556"/></g>
+    <!-- table two -->
+    <ellipse cx="730" cy="544" rx="74" ry="17" fill="#F7F1EA" stroke="#4A2218"/>
+    <line x1="730" y1="561" x2="730" y2="618"/><line x1="702" y1="622" x2="758" y2="622"/>
+    <g><line x1="634" y1="572" x2="634" y2="622"/><line x1="612" y1="572" x2="660" y2="572"/><line x1="612" y1="572" x2="612" y2="532"/></g>
+    <g><line x1="826" y1="572" x2="826" y2="622"/><line x1="802" y1="572" x2="850" y2="572"/><line x1="850" y1="572" x2="850" y2="532"/></g>
+  </g>
+  <!-- two cups on the near table -->
+  <g fill="#F4EDE1" stroke="#9C8A72" stroke-width="3">
+    <rect x="392" y="548" width="22" height="20" rx="3"/>
+    <rect x="428" y="548" width="22" height="20" rx="3"/>
+  </g>
+
+  <!-- integrity label, baked into the artwork so it cannot be cropped away by accident -->
+  <g>
+    <rect x="28" y="828" width="498" height="44" rx="22" fill="#2C2416" opacity="0.88"/>
+    <text x="52" y="856" font-family="Inter, Arial, Helvetica, sans-serif" font-size="19" letter-spacing="1.1" fill="#FFFFFF">CONCEPT ILLUSTRATION — NOT A PHOTOGRAPH</text>
+  </g>
+</svg>
