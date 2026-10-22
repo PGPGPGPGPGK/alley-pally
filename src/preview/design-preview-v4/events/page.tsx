@@ -91,7 +91,7 @@ export default function V4Events() {
             href={`${LIVE_SITE}/events`}
             className="inline-flex min-h-11 items-center gap-1 rounded-full border-2 border-pally-brown px-5 text-[13px] font-semibold text-pally-brown transition-colors hover:gap-2 hover:bg-pally-brown hover:text-white"
           >
-            See the real event history <span aria-hidden>↗</span>
+            See the real event history <span aria-hidden>↗︎</span>
           </a>
         </p>
       </V4Section>

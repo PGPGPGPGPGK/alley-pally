@@ -83,7 +83,7 @@ export default function Nallagandla() {
             href={L.mapsUrl}
             className="inline-flex min-h-11 items-center gap-1 font-semibold text-pally-green underline underline-offset-4 hover:text-pally-green-dark"
           >
-            Directions <span aria-hidden>↗</span>
+            Directions <span aria-hidden>↗︎</span>
           </a>
           <a
             href={ROUTES.menu}
@@ -203,7 +203,7 @@ export default function Nallagandla() {
                 href={L.mapsUrl}
                 className="mt-1 block font-semibold text-pally-green underline underline-offset-4 hover:text-pally-green-dark"
               >
-                Open in Google Maps ↗
+                Open in Google Maps ↗︎
               </a>
             </dd>
           </div>

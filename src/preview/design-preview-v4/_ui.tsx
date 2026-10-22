@@ -318,7 +318,7 @@ export function V4LocationCard({
             className="relative z-10 inline-flex min-h-11 items-center gap-1 text-[12.5px] font-semibold text-pally-green underline underline-offset-4 hover:text-pally-green-dark"
           >
             Directions
-            <span aria-hidden>↗</span>
+            <span aria-hidden>↗︎</span>
             <span className="sr-only">to {location.name} on Google Maps</span>
           </a>
           {!location.hoursVerified && (

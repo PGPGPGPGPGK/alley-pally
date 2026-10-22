@@ -138,7 +138,7 @@ export default async function Experience({ params }: { params: Promise<{ slug: s
               href={ROUTES.library}
               className="inline-flex min-h-11 items-center gap-1 rounded-full bg-pally-green px-5 text-[13px] font-semibold text-white transition-colors hover:gap-2 hover:bg-pally-green-dark"
             >
-              Browse the real catalogue <span aria-hidden>↗</span>
+              Browse the real catalogue <span aria-hidden>↗︎</span>
             </a>
           </p>
         </V4Section>
@@ -158,7 +158,7 @@ export default async function Experience({ params }: { params: Promise<{ slug: s
             href={ROUTES.menu}
             className="mt-4 inline-flex min-h-12 items-center justify-center gap-1 rounded-full bg-pally-green px-6 text-[14px] font-semibold text-white transition-colors hover:bg-pally-green-dark"
           >
-            See the menu <span aria-hidden>↗</span>
+            See the menu <span aria-hidden>↗︎</span>
           </a>
         </V4Section>
       )}

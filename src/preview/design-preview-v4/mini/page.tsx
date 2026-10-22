@@ -67,7 +67,7 @@ export default function Mini() {
                   href={L.mapsUrl}
                   className="mt-1 block font-semibold text-pally-green underline underline-offset-4 hover:text-pally-green-dark"
                 >
-                  Open in Google Maps ↗
+                  Open in Google Maps ↗︎
                 </a>
               </dd>
             </div>
@@ -178,7 +178,7 @@ export default function Mini() {
             href={L.mapsUrl}
             className="inline-flex min-h-11 items-center justify-center rounded-full bg-pally-green px-5 text-[13px] font-semibold text-white transition-colors hover:bg-pally-green-dark"
           >
-            Directions to Mini ↗
+            Directions to Mini ↗︎
           </a>
           <Link
             href={ROUTES.nallagandla}
