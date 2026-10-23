@@ -160,6 +160,8 @@ export type NallagandlaTile = {
   id: string;
   title: string;
   teaser: string;
+  /** Who the room is for, in a visitor's words. Helps someone pick before arriving. */
+  suitedFor?: string;
   body: string[];
   image: { src: string; alt: string };
   link?: { label: string; href: string };
@@ -167,59 +169,75 @@ export type NallagandlaTile = {
 
 export const NALLAGANDLA_TILES: NallagandlaTile[] = [
   {
+    id: "readers-room",
+    title: "The Reader's Room",
+    teaser: "Low seating, a wall of books, and quiet kept on purpose.",
+    suitedFor: "Reading alone · finishing the book you keep meaning to finish",
+    body: [
+      "A shelf you can actually borrow from, and a room built to stay quiet for the people using it. Pick something off the wall, take it to a chair, and read one page or a hundred.",
+      "Books stay in the café — borrow freely inside, and put them back as you found them.",
+    ],
+    image: {
+      src: "/images/gallery/1.jpg",
+      alt: "The book wall and the window counter at Alley Pally, warm lamps lit at dusk",
+    },
+    link: { label: "More about reading here", href: ROUTES.experience("read") },
+  },
+  {
+    id: "game-room",
+    title: "The Game Room",
+    teaser: "Board games with all their pieces, in a room where noise is the point.",
+    suitedFor: "Friends and family · long games · talking loudly",
+    body: [
+      "Games with every piece still in the box, and someone who will teach you the rules if you ask. Spread out, argue about them, take as long as you like.",
+      "Pack them back complete and tidy so the next table gets the same.",
+    ],
+    image: {
+      src: "/images/gallery/7.jpg",
+      alt: "Guests around the long table at Alley Pally, talking in the daylight by the window",
+    },
+    link: { label: "More about playing here", href: ROUTES.experience("play") },
+  },
+  {
     id: "quiet-studio",
     title: "The Quiet Studio",
-    teaser: "A room that stays quiet, for reading and concentrating.",
+    teaser: "The room that keeps its voice down.",
+    suitedFor: "Concentrating · quiet time · a long session with a laptop",
     body: [
-      "The window side catches a long, slow sunset, and the room keeps its voice down on purpose. It is the corner people choose when they want to read properly, think something through, or sit with family without a soundtrack.",
-      "Nobody is counting the minutes. The chair is yours for as long as you want it.",
+      "The window side catches a long, slow sunset, and the room stays quiet on purpose. It is where people go to think something through, or to sit with family without a soundtrack.",
+      "There is a power socket at every table and free Wi-Fi throughout, if you are here to work.",
     ],
     image: {
       src: "/images/about-cafe.jpg",
-      alt: "The studio room at Alley Pally: tables beside the book wall, with window-side seating along the glass",
+      alt: "Tables beside the book wall at Alley Pally, with window-side seating along the glass",
     },
-    link: { label: "More about reading here", href: ROUTES.experience("read") },
   },
   {
     id: "backyard",
     title: "The Backyard",
     teaser: "The garden out the back, full of plants.",
+    suitedFor: "Evenings · pets · Sunday music · doing nothing",
     body: [
-      "This is the heart of Alley Pally. We filled it with plants on purpose, to bring a pocket of the wild into the city, and it is where most people end up sitting when the evening cools down.",
-      "Pets are welcome out here. Every Sunday evening the backyard turns to music — no ticket, no cover.",
+      "The heart of Alley Pally. We filled it with plants on purpose, to bring a pocket of the wild into the city, and it is where most people end up once the evening cools.",
+      "Pets are welcome out here. Every Sunday evening it turns to music — no ticket, no cover.",
     ],
     image: {
-      src: "/images/gallery/9.jpg",
-      alt: "The garden backyard at Alley Pally, planted and full of guests",
-    },
-  },
-  {
-    id: "a-real-break",
-    title: "A Real Break",
-    teaser: "Slow lunches, long conversations, nowhere to be.",
-    body: [
-      "Step out of the rush for an hour. A slow lunch, a page of a book, a board game with whoever is nearby, a conversation that is allowed to wander.",
-      "We opened because somewhere along the way we stopped reading, stopped sitting still with the people we love, stopped looking up at trees. This is the part of the café that exists for that.",
-    ],
-    image: {
-      src: "/images/gallery/3.jpg",
-      alt: "A latte and a croissant on a tray, on one of the wooden tables at Alley Pally",
-    },
-  },
-  {
-    id: "work-from-here",
-    title: "Work From Here",
-    teaser: "Laptop-friendly, with a socket at every table and free Wi-Fi.",
-    body: [
-      "A laptop-friendly café in Nallagandla, Hyderabad: there is a power socket at every table, so you can charge freely, and Wi-Fi is free throughout.",
-      "We are open from 8 in the morning until 11 at night, every day, so a long working session fits without anyone hovering over your table.",
-    ],
-    image: {
-      src: "/images/workspace.jpg",
-      alt: "A laptop and lunch on a wooden table at Alley Pally",
+      src: "/images/gallery/2.jpg",
+      alt: "The planted courtyard at Alley Pally, with garden tables and chairs below the mezzanine",
     },
   },
 ];
+
+/**
+ * Where each room physically sits is NOT documented anywhere authoritative.
+ *
+ * Two customer reviews on the live site mention private cabins on the first floor
+ * ("2 cabins on the first floor", "upper-floor private cabins"), and the menu PDF names
+ * the four rooms without saying which floor any of them is on. Rather than guess, the page
+ * says what is known and this note goes to Arun for confirmation.
+ */
+export const FLOORS_UNCONFIRMED =
+  "Ground floor, first floor and backyard layout is not documented — the four rooms are named in the menu PDF without floors, and the only mentions of upstairs cabins come from customer reviews. Awaiting confirmation.";
 
 /**
  * The work-friendly line, kept in one place so the page and the metadata cannot drift.
@@ -248,11 +266,20 @@ export const WORK_FRIENDLY = {
  * through `MEDIA_BASE`, which falls back to the real media host, so the preview plays the
  * genuine footage with no infrastructure change.
  */
-export const DRONE = {
+export const FILM = {
   webm: "/videos/hero-bg.webm",
   mp4: "/videos/hero-bg.mp4",
   poster: "/images/nallagandla-drone-poster.jpg",
-  alt: "Aerial view of Alley Pally in Nallagandla, looking down over the garden and the roof",
+  /**
+   * Corrected. This was captioned "The café from above" with alt text describing an
+   * aerial "looking down over the garden and the roof" — Arun spotted that it sat over
+   * interior footage. Checked frame by frame: the 44 seconds open on the slatted wood
+   * frontage from a low drone height, move inside past the book wall and the window
+   * counter, and close on the illuminated sign at dusk. It is a walkthrough, not an
+   * aerial, and the words now say so.
+   */
+  alt: "A walk through Alley Pally in Nallagandla: the wooden frontage, the book wall and window counter inside, and the lit sign at dusk",
+  caption: "A walk through the café, from the street to the book wall to closing light.",
 };
 
 /* ------------------------------------------------------------ Mini's artwork --- */
@@ -270,3 +297,127 @@ export const MINI_ARTWORK = {
   alt: "Concept illustration: a small wooden café kiosk wrapped in greenery at golden hour, with outdoor tables and a pickleball court behind it",
   label: "Illustration · not a photograph",
 };
+
+
+/* ------------------------------------------------------------------- homepage hero --- */
+
+/**
+ * The hero photograph.
+ *
+ * Arun's note was that the layout is clean but the old site feels warmer. The fix is not
+ * more words, it is a real photograph of the place at its best: the backyard on an evening,
+ * with people in it, under the hanging plants and the festoon lights. It is first on the
+ * brief's own priority list and it is the single most inviting frame in the library.
+ *
+ * It sits under a brown scrim rather than beside the type, so the Hearth identity survives
+ * and the headline keeps its contrast without hunting for a dark patch in the photo.
+ */
+export const HERO = {
+  src: "/images/gallery/9.jpg",
+  alt: "Guests sitting together in the planted backyard at Alley Pally on an evening, under hanging plants and festoon lights",
+};
+
+/** The habit-café idea, said once, in the owners' own framing from the menu PDF. */
+export const HABIT = {
+  headline: STORY.philosophy,
+  support:
+    "A book you have been meaning to finish. A game with friends. A conversation that runs longer than planned. Or a little time to yourself.",
+  invitation: "Come for any reason. Make a habit of it.",
+};
+
+/* ------------------------------------------------------------------ quick actions --- */
+
+/**
+ * For someone who has already decided to come. Verified destinations only: the menu is the
+ * live route the printed QR codes use, the map link is the one already in the location
+ * data, and the WhatsApp number is the business number used on the production site.
+ */
+export const QUICK_ACTIONS = [
+  { label: "Menu", href: ROUTES.menu, kind: "menu" as const, external: true },
+  {
+    label: "Directions",
+    href: LOCATIONS.nallagandla.mapsUrl,
+    kind: "map" as const,
+    external: true,
+  },
+  {
+    label: "WhatsApp",
+    href: "https://wa.me/919032694008?text=Hi%2C%20I%E2%80%99d%20like%20to%20ask%20about%20Alley%20Pally",
+    kind: "chat" as const,
+    external: true,
+  },
+];
+
+/* ----------------------------------------------------------------- food and coffee --- */
+
+/**
+ * Modest words, good pictures — Arun's positioning, kept.
+ *
+ * Every dish shown was checked against src/lib/menu-data.ts first. `food/hotdog.jpg` is
+ * deliberately NOT here: there is no hot dog on the approved menu, so it would have been an
+ * outdated offering. There is also no photograph of the wood-fired pizza anywhere in the
+ * repository, which is flagged for Arun rather than filled with a stand-in.
+ *
+ * The lead photograph is the one with warmth in it rather than a white studio background.
+ * Its pastry is not named, because no croissant appears on the current menu either.
+ */
+export const FOOD = {
+  headline: "Come for the company. Stay for another slice.",
+  body:
+    "We did not build Alley Pally to serve food. But while you are here, we would love to make you something good — a vegetarian kitchen with eggs, coffee on A2 milk, and a wood-fired oven we built ourselves.",
+  lead: {
+    src: "/images/gallery/3.jpg",
+    alt: "A latte and a pastry on a dark tray, on one of the wooden tables at Alley Pally",
+  },
+  /** Verified against the current menu: bagels, subs, pesto, salads and coffee all appear. */
+  dishes: [
+    { src: "/images/food/pesto-sub.jpg", alt: "An open pesto sub on a dark plate" },
+    { src: "/images/food/sub.jpg", alt: "A toasted sub with fries and dips" },
+    { src: "/images/food/bagel.jpg", alt: "A filled bagel" },
+    { src: "/images/food/salad.jpg", alt: "A bowl of salad" },
+  ],
+};
+
+/* ------------------------------------------------------------------------ reviews --- */
+
+/**
+ * Four genuine Google reviews, copied verbatim from the production site's own
+ * Testimonials component — the same words and attribution Alley Pally already publishes.
+ * Nothing was written, merged, trimmed or re-attributed here.
+ *
+ * Verification limit, stated plainly: these were taken from the business's own published
+ * site, not re-fetched from Google. See the confirmation checklist.
+ *
+ * Chosen to cover different things: games and books, the garden and neighbours, a first
+ * visit, and the food.
+ */
+export const REVIEWS = [
+  {
+    quote:
+      "Alley Pally has been a surprise find for me & my gang. As a family of book & board game lovers, this place deserves a wow. The food is just yummy, perfectly balanced in taste & the service deserves a call out. Has become an absolute favourite hangout for us!",
+    name: "neeha u",
+    source: "Google Review · 5 reviews",
+    about: "Books and board games",
+  },
+  {
+    quote:
+      "A true neighborhood gem! A green oasis drenched in calm vibes. Met my neighbors and had a fun boardgame night with kids. The food is fun, clean, slow and mindful. Looking forward to more evenings of music, books, and friends!",
+    name: "Maitreyi Nachuri",
+    source: "Local Guide · 196 reviews",
+    about: "The garden and the neighbourhood",
+  },
+  {
+    quote:
+      "Loved my visit! The Wood Fired Paneer Tikka Pizza & Cauliflower Steak is a must try. The Vietnamese Latte was delicious too. Great book collection and we even learned a new board game. Calm vibe, easy to spend time here. Highly recommended!",
+    name: "Ravi Roshan Singh",
+    source: "Local Guide · 4 reviews",
+    about: "A first visit",
+  },
+  {
+    quote:
+      "It was wonderfully calm for a Saturday brunch. We tried the avocado toast, farmhouse pizza, grilled red bean steak, mango shake, and the Alley Pally OG cold coffee — and every dish was delicious. Loved the place, the food, and the relaxed atmosphere.",
+    name: "Vandana Negi",
+    source: "Local Guide · 57 reviews",
+    about: "Food and coffee",
+  },
+];

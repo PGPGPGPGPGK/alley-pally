@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Photo } from "../design-preview/_ui";
 import { ICONS } from "../design-preview-v3/_ui";
-import { DESTINATIONS, LOCATIONS, STORY, type V4Location } from "./_data";
+import { DESTINATIONS, LOCATIONS, QUICK_ACTIONS, REVIEWS, STORY, type V4Location } from "./_data";
 import { HOME, ROUTES, V4 } from "./_routes";
 
 export { HOME, V4 };
@@ -50,13 +50,7 @@ export function Philosophy({ className = "" }: { className?: string }) {
   );
 }
 
-/**
- * The preview marker.
- *
- * Visible on every page and deliberately plain: this is a public URL, so a reader who
- * arrives at it needs to know within a second that it is a proposal and not the live
- * Alley Pally website. It carries no link — there is nowhere else in this preview to go.
- */
+/** The strip that keeps each preview page honest about being a preview. */
 export function V4Strip({ name }: { name?: string }) {
   return (
     <p className="bg-pally-charcoal px-3 py-1.5 text-center text-[11px] leading-snug text-white/80">
@@ -474,5 +468,98 @@ export function V4Footer() {
         </p>
       </div>
     </footer>
+  );
+}
+
+
+/* ------------------------------------------------------------------ quick actions --- */
+
+const ACTION_ICON = {
+  menu: (
+    <>
+      <path d="M5 4.5h11a2 2 0 0 1 2 2v13H7a2 2 0 0 1-2-2z" />
+      <path d="M8.5 9h7M8.5 12.5h7M8.5 16h4" />
+    </>
+  ),
+  map: (
+    <>
+      <path d="M12 21s6.5-6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15 12 21 12 21z" />
+      <circle cx="12" cy="10.5" r="2.4" />
+    </>
+  ),
+  chat: (
+    <>
+      <path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4.5 19.5l1.4-4.4A7.5 7.5 0 1 1 20 11.5z" />
+      <path d="M8.8 9.8c.3 2.2 2.2 4.1 4.4 4.4.5.1 1-.2 1.2-.7l.2-.6-1.8-.9-.6.7a4.6 4.6 0 0 1-1.9-1.9l.7-.6-.9-1.8-.6.2c-.5.2-.8.7-.7 1.2z" />
+    </>
+  ),
+};
+
+/**
+ * Menu, Directions, WhatsApp — for someone who has already decided to come.
+ *
+ * Placed in the flow near the top rather than in a sticky bar: a bar pinned over the page
+ * is the thing that covers content and fights the browser's own navigation on a phone,
+ * which the brief explicitly rules out. Each target is a verified destination, each is a
+ * full-width tap target on a phone and they sit in one row from `sm` up.
+ */
+export function QuickActions({ className = "" }: { className?: string }) {
+  return (
+    <ul className={`grid gap-2 sm:grid-cols-3 ${className}`}>
+      {QUICK_ACTIONS.map((a) => (
+        <li key={a.label}>
+          <a
+            href={a.href}
+            {...(a.external ? { rel: "noreferrer" } : {})}
+            className="group flex min-h-12 items-center justify-center gap-2 rounded-full bg-pally-brown-dark px-5 text-[14px] font-semibold text-pally-cream transition-colors hover:bg-pally-charcoal"
+          >
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              {ACTION_ICON[a.kind]}
+            </svg>
+            {a.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* ------------------------------------------------------------------------ reviews --- */
+
+/**
+ * Four genuine Google reviews, kept deliberately restrained — a quiet row, not the
+ * testimonial wall the old site had. Every word and every name is reproduced exactly as
+ * Alley Pally already publishes it; nothing is merged, trimmed or re-attributed.
+ */
+export function Reviews() {
+  return (
+    <ul className="grid gap-3 sm:grid-cols-2">
+      {REVIEWS.map((r) => (
+        <li key={r.name}>
+          <figure className="flex h-full flex-col rounded-2xl bg-pally-white p-4 ring-1 ring-pally-sand/70">
+            <figcaption className="text-[10px] font-semibold uppercase tracking-[0.16em] text-pally-accent">
+              {r.about}
+            </figcaption>
+            <blockquote className="mt-2 flex-1 text-[13.5px] leading-relaxed text-pally-brown-light">
+              &ldquo;{r.quote}&rdquo;
+            </blockquote>
+            <p className="mt-3 text-[12.5px] text-pally-brown-dark">
+              <span className="font-semibold">{r.name}</span>
+              <span className="text-pally-brown-light"> · {r.source}</span>
+            </p>
+          </figure>
+        </li>
+      ))}
+    </ul>
   );
 }

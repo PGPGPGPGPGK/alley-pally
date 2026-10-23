@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { MEDIA_BASE } from "@/lib/media";
-import { DRONE } from "./_data";
+import { FILM } from "./_data";
 import { usePrefersReducedMotion } from "./_motion";
 import { BASE_PATH } from "./_routes";
 
@@ -35,7 +35,7 @@ import { BASE_PATH } from "./_routes";
  *
  * Failure: if the video cannot load, the poster simply stays. The section still reads.
  */
-export function DroneVideo({ className = "" }: { className?: string }) {
+export function CafeFilm({ className = "" }: { className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduced = usePrefersReducedMotion();
   const [ready, setReady] = useState(false);
@@ -67,8 +67,8 @@ export function DroneVideo({ className = "" }: { className?: string }) {
     <figure className={`relative ${className}`}>
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-pally-warm sm:aspect-[16/9]">
         <Image
-          src={DRONE.poster}
-          alt={DRONE.alt}
+          src={FILM.poster}
+          alt={FILM.alt}
           fill
           sizes="(max-width: 768px) 100vw, 1100px"
           className="object-cover"
@@ -82,16 +82,16 @@ export function DroneVideo({ className = "" }: { className?: string }) {
             loop
             playsInline
             preload="none"
-            poster={`${BASE_PATH}${DRONE.poster}`}
-            aria-label={DRONE.alt}
+            poster={`${BASE_PATH}${FILM.poster}`}
+            aria-label={FILM.alt}
             onCanPlay={() => setReady(true)}
             onError={() => setFailed(true)}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 motion-reduce:transition-none ${
               ready && started ? "opacity-100" : "opacity-0"
             }`}
           >
-            <source src={`${MEDIA_BASE}${DRONE.webm}`} type="video/webm" />
-            <source src={`${MEDIA_BASE}${DRONE.mp4}`} type="video/mp4" />
+            <source src={`${MEDIA_BASE}${FILM.webm}`} type="video/webm" />
+            <source src={`${MEDIA_BASE}${FILM.mp4}`} type="video/mp4" />
           </video>
         )}
 
@@ -111,7 +111,7 @@ export function DroneVideo({ className = "" }: { className?: string }) {
       </div>
 
       <figcaption className="mt-2 text-[11.5px] text-pally-brown-light/85">
-        The café from above, Nallagandla.{" "}
+        {FILM.caption}{" "}
         {failed && <span>Video unavailable right now — the still is from the same flyover.</span>}
       </figcaption>
     </figure>

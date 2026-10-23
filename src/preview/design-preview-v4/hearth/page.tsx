@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { LOCATION_LIST, STORY } from "../_data";
+import { HABIT, HERO, LOCATION_LIST, STORY } from "../_data";
 import { V4Name } from "../_name";
 import { V4Nav } from "../_nav";
 import {
@@ -13,24 +14,27 @@ import {
 } from "../_ui";
 
 export const metadata: Metadata = {
-  title: "Alley Pally — a place to be",
-  description: "Not a cafe. A place to be. Alley Pally in Nallagandla and Parvathapur, Hyderabad.",
+  title: "Alley Pally — not a cafe, a place to be",
+  description:
+    "A book you have been meaning to finish, a game with friends, or a little time to yourself. Alley Pally in Nallagandla and Parvathapur, Hyderabad.",
   robots: { index: false, follow: false },
 };
 
 /**
- * Hearth — the chosen homepage.
+ * The homepage.
  *
- * It opens on the signature brown itself rather than on cream: the palette's anchor fills
- * the first screen and the name sits inside it. No photograph does that work — the colour
- * does, which is the point of having sampled it from the café's own woodwork.
+ * Arun's note was that the structure is clean but the old site feels warmer, so the hero
+ * now opens on a real photograph of the backyard on an evening, with people in it, instead
+ * of on type alone. The brown is still there — it is the scrim over the photograph, which
+ * both keeps the Hearth identity and guarantees the headline's contrast without hunting
+ * for a dark patch in the image.
  *
- * The header is rendered above the band rather than inside it. It is the same brown, so
- * the two read as one surface, but being a sibling of the band is what lets it stay stuck
- * to the top of the viewport for the whole page instead of scrolling away with the band.
+ * The first impression is deliberately about the place, not the amenities: no laptops, no
+ * sockets, no Wi-Fi above the fold. Those live on the Nallagandla page where someone who
+ * has decided to come looks for them.
  *
- * Contrast note: on the brown, small text is cream or gold-light. Terracotta
- * (accent-light) is only 3.1:1 there, so it is used for decorative marks, never for text.
+ * "Nobody is counting the minutes" is said once on this site, on the Nallagandla page. It
+ * is not repeated here.
  */
 export default function Hearth() {
   return (
@@ -38,36 +42,64 @@ export default function Hearth() {
       <V4Strip />
       <V4Nav />
 
-      {/* 1 — The name and the philosophy, inside the brown. */}
-      <div className="bg-pally-brown-dark">
-        <div className="mx-auto max-w-6xl px-4 pb-11 pt-9 text-center sm:px-6 md:pb-14 md:pt-12">
+      {/* 1 — The place, then the promise. */}
+      <section className="relative isolate flex min-h-[540px] items-center overflow-hidden bg-pally-brown-dark md:min-h-[620px]">
+        <Image
+          src={HERO.src}
+          alt={HERO.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_58%]"
+        />
+        {/*
+          Two scrim layers rather than one. A flat brown tint carries the brand and holds
+          the photograph back a little; the gradient then darkens only the top, where the
+          eyebrow and headline sit, and the very bottom, so the section blends into the
+          brown band below. The middle stays light enough that you can actually see the
+          garden and the people in it — a single heavy gradient hid them completely.
+        */}
+        <div aria-hidden className="absolute inset-0 bg-pally-brown-dark/45" />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-pally-brown-dark/80 via-pally-brown-dark/30 to-pally-brown-dark/90"
+        />
+        <div className="relative mx-auto w-full max-w-6xl px-4 py-14 text-center sm:px-6 md:py-16">
           <p className="text-[10.5px] font-semibold uppercase tracking-[0.26em] text-pally-gold-light">
             {STORY.promise}
           </p>
-          <Philosophy className="mt-3 font-heading text-[clamp(2.1rem,9vw,4rem)] leading-[1.05] tracking-[-0.015em] text-white" />
-          <p className="mx-auto mt-4 max-w-[54ch] text-[14.5px] leading-relaxed text-white/75">
-            {STORY.why}
+          <Philosophy className="mt-3 font-heading text-[clamp(2.1rem,9vw,4.2rem)] leading-[1.05] tracking-[-0.015em] text-white drop-shadow-sm" />
+          <p className="mx-auto mt-5 max-w-[52ch] text-[15px] leading-relaxed text-white">
+            {HABIT.support}
           </p>
-
-          <div className="mt-8 md:mt-11">
-            <p className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white/55">
-              Where the name comes from
-            </p>
-            <div className="mt-3">
-              <V4Name variant="equation" />
-            </div>
-          </div>
-
+          <p className="mt-3 font-heading text-[clamp(1.1rem,4vw,1.5rem)] text-pally-gold-light">
+            {HABIT.invitation}
+          </p>
           <Link
             href="#locations"
-            className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-pally-cream px-5 text-[13px] font-semibold text-pally-brown-dark transition-colors hover:bg-white"
+            className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-full bg-pally-cream px-6 text-[13px] font-semibold text-pally-brown-dark transition-colors hover:bg-white"
           >
             Choose a cafe <span aria-hidden>↓</span>
           </Link>
         </div>
-      </div>
+      </section>
 
-      {/* 2 — Four destinations, one row, icon and word only. */}
+      {/* 2 — Where the name comes from, and why the place exists. */}
+      <section className="bg-pally-brown-dark">
+        <div className="mx-auto max-w-6xl px-4 pb-12 pt-10 text-center sm:px-6 md:pb-14">
+          <p className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-white/55">
+            Where the name comes from
+          </p>
+          <div className="mt-3">
+            <V4Name variant="equation" />
+          </div>
+          <p className="mx-auto mt-8 max-w-[56ch] border-t border-white/15 pt-6 text-[14.5px] leading-relaxed text-white/75">
+            {STORY.why}
+          </p>
+        </div>
+      </section>
+
+      {/* 3 — Four ways to spend the time. */}
       <V4Section className="py-8 md:py-11">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <h2 className="font-heading text-[clamp(1.5rem,5vw,2.1rem)] text-pally-brown-dark">
@@ -82,7 +114,7 @@ export default function Hearth() {
         </div>
       </V4Section>
 
-      {/* 3 — Choose your cafe. */}
+      {/* 4 — Two cafes, two different things. */}
       <V4Section id="locations" className="bg-pally-warm/40 py-8 scroll-mt-24 md:py-11">
         <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <h2 className="font-heading text-[clamp(1.5rem,5vw,2.1rem)] text-pally-brown-dark">

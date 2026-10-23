@@ -110,6 +110,12 @@ function ExpandableTile({ tile }: { tile: NallagandlaTile }) {
         <div className="overflow-hidden">
           <div id={panelId} role="region" aria-label={tile.title} className="px-4 pb-4">
             <div className="border-t border-pally-sand pt-3">
+              {/* Who the room is for, so someone can pick a corner before they arrive. */}
+              {tile.suitedFor && (
+                <p className="mb-2.5 text-[11.5px] font-semibold uppercase tracking-[0.12em] text-pally-accent">
+                  {tile.suitedFor}
+                </p>
+              )}
               {tile.body.map((p) => (
                 <p key={p} className="mt-2 text-[13.5px] leading-relaxed text-pally-brown-light first:mt-0">
                   {p}

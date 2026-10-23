@@ -2,42 +2,41 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { LOCATIONS, NALLAGANDLA_TILES, STORY, WORK_FRIENDLY } from "../_data";
-import { DroneVideo } from "../_drone";
+import { Photo } from "../../design-preview/_ui";
+import { FLOORS_UNCONFIRMED, FOOD, LOCATIONS, NALLAGANDLA_TILES, STORY } from "../_data";
+import { CafeFilm } from "../_drone";
 import { V4Nav } from "../_nav";
 import { ROUTES } from "../_routes";
 import { ExpandableTiles } from "../_tiles";
-import { V4Footer, V4Section, V4Strip } from "../_ui";
+import { QuickActions, Reviews, V4Footer, V4Section, V4Strip } from "../_ui";
 
 export const metadata: Metadata = {
-  title: "V4 · Alley Pally, Nallagandla",
+  title: "Alley Pally, Nallagandla — books, board games and a backyard",
   description:
-    "A laptop-friendly café in Nallagandla, Hyderabad, with power sockets at every table and free Wi-Fi. Books, board games, a backyard and a wood-fired oven. Open daily, 8 AM – 11 PM.",
+    "The main café in Nallagandla, Hyderabad. A room for reading, a room for board games, a quiet studio and a planted backyard with live music on Sunday evenings.",
   robots: { index: false, follow: false },
 };
 
 const L = LOCATIONS.nallagandla;
 
 /**
- * The main café.
+ * The main café — the richer of the two location pages.
  *
- * Structure, after the second round of feedback: the drone shot and the essentials, a
- * short overview, food and events as two compact prompts, visiting, and then the four
- * expandable tiles immediately above the footer.
+ * Order follows the brief: the film, the three actions someone needs if they have already
+ * decided to come, then the rooms, the food, Sunday music, what else there is, the reviews,
+ * and the practical details.
  *
- * What was removed and why: the rooms grid, the "what you can do here" strip and the
- * standalone work-friendly band all described the same four things in three different
- * ways. They are now one section — the expandable tiles — which is also where the
- * work-friendly information lives. The old "Before you come" block stays gone.
+ * The opening line is about the place, not the amenities. Sockets and Wi-Fi moved into the
+ * Quiet Studio card and the visiting block, because leading with them made the café read
+ * like a workspace advertisement.
  *
- * Deliberately absent everywhere: seat counts, table breakdowns, room layouts, and any
- * mention of the printer or stationery. Both are stripped at the data layer and asserted
- * by scripts/check-v4.mjs.
+ * Deliberately absent: seat counts, table breakdowns, room layouts, and any mention of the
+ * printer or stationery. All stripped at the data layer and asserted by scripts/check-v4.mjs.
  */
 export default function Nallagandla() {
   return (
     <>
-      <V4Strip name="Nallagandla" />
+      <V4Strip />
       <V4Nav />
 
       <JsonLd
@@ -55,7 +54,6 @@ export default function Nallagandla() {
           },
           telephone: "+919032694008",
           openingHours: "Mo-Su 08:00-23:00",
-          // Only what is verified: the PDF for sockets, the live site's own listing for Wi-Fi.
           amenityFeature: [
             { "@type": "LocationFeatureSpecification", name: "Free WiFi", value: true },
             {
@@ -67,39 +65,26 @@ export default function Nallagandla() {
         }}
       />
 
-      <V4Section className="pb-6 pt-8 md:pt-11">
+      <V4Section className="pb-5 pt-8 md:pt-11">
         <p className="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-pally-accent">
           {L.area} · Hyderabad
         </p>
         <h1 className="mt-2 font-heading text-[clamp(2rem,8vw,3.4rem)] leading-[1.05] tracking-[-0.015em] text-pally-brown-dark">
           Alley Pally, Nallagandla
         </h1>
-        <p className="mt-3 max-w-[56ch] text-[15px] leading-relaxed text-pally-brown-light">
-          {WORK_FRIENDLY.line}
+        <p className="mt-3 max-w-[54ch] text-[15px] leading-relaxed text-pally-brown-light">
+          Books you can borrow, board games with all their pieces, a planted backyard, and a
+          wood-fired oven that takes over after five.
         </p>
-        <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-pally-brown-dark">
-          <span className="font-semibold">{L.hours}</span>
-          <a
-            href={L.mapsUrl}
-            className="inline-flex min-h-11 items-center gap-1 font-semibold text-pally-green underline underline-offset-4 hover:text-pally-green-dark"
-          >
-            Directions <span aria-hidden>↗︎</span>
-          </a>
-          <a
-            href={ROUTES.menu}
-            className="inline-flex min-h-11 items-center font-semibold text-pally-accent underline underline-offset-4 hover:text-pally-brown-dark"
-          >
-            Menu
-          </a>
-        </p>
+        <p className="mt-2 text-[13px] font-semibold text-pally-brown-dark">{L.hours}</p>
+
+        <QuickActions className="mt-5 max-w-xl" />
       </V4Section>
 
-      {/* The original drone footage from the production site. */}
       <V4Section className="pb-8">
-        <DroneVideo />
+        <CafeFilm />
       </V4Section>
 
-      {/* A short overview, in the PDF's own words. */}
       <V4Section className="bg-pally-warm/40 py-8 md:py-10">
         <h2 className="font-heading text-[clamp(1.4rem,5vw,2rem)] text-pally-brown-dark">
           What this place is
@@ -107,13 +92,58 @@ export default function Nallagandla() {
         <p className="mt-2.5 max-w-[62ch] text-[14.5px] leading-relaxed text-pally-brown-light">
           {STORY.welcome}
         </p>
-        <p className="mt-3 max-w-[62ch] border-l-2 border-pally-accent/45 pl-4 text-[14px] leading-relaxed text-pally-brown-light">
-          {STORY.modesty}
+      </V4Section>
+
+      {/* The rooms, so someone can pick their corner before they arrive. */}
+      <V4Section id="corners" className="py-9 scroll-mt-20 md:py-12">
+        <h2 className="font-heading text-[clamp(1.5rem,5vw,2.2rem)] text-pally-brown-dark">
+          Find your corner
+        </h2>
+        <p className="mt-1.5 max-w-[58ch] text-[13.5px] text-pally-brown-light">
+          Four rooms, each for a different kind of afternoon. Open any one for more.
+        </p>
+        <div className="mt-5">
+          <ExpandableTiles tiles={NALLAGANDLA_TILES} />
+        </div>
+        <p className="mt-4 max-w-[64ch] rounded-xl bg-pally-gold/15 px-3.5 py-2.5 text-[12px] leading-relaxed text-pally-brown-dark">
+          <span className="font-semibold">Needs confirming:</span> {FLOORS_UNCONFIRMED}
         </p>
       </V4Section>
 
-      {/* Sunday music gets its own highlight: it is the one recurring thing, and folding it
-          in with workshops implied everything happened every Sunday. */}
+      {/* Food: modest words, good pictures. */}
+      <V4Section className="bg-pally-warm/40 py-9 md:py-12">
+        <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-center">
+          <div>
+            <h2 className="font-heading text-[clamp(1.5rem,5vw,2.2rem)] leading-tight text-pally-brown-dark">
+              {FOOD.headline}
+            </h2>
+            <p className="mt-3 max-w-[52ch] text-[14.5px] leading-relaxed text-pally-brown-light">
+              {FOOD.body}
+            </p>
+            <a
+              href={ROUTES.menu}
+              className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-pally-green px-6 text-[14px] font-semibold text-white transition-colors hover:bg-pally-green-dark"
+            >
+              See the menu
+            </a>
+          </div>
+          <figure>
+            <Photo src={FOOD.lead.src} alt={FOOD.lead.alt} ratio="4/3" />
+          </figure>
+        </div>
+
+        <ul className="mt-5 grid grid-cols-4 gap-2 sm:gap-3">
+          {FOOD.dishes.map((d) => (
+            <li key={d.src}>
+              <div className="relative aspect-square overflow-hidden rounded-xl bg-pally-white ring-1 ring-pally-sand/70">
+                <Image src={d.src} alt={d.alt} fill sizes="(max-width: 640px) 25vw, 160px" className="object-cover" />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </V4Section>
+
+      {/* Sunday music gets its own highlight: it is the one recurring thing. */}
       <V4Section className="py-8 md:py-10">
         <section className="overflow-hidden rounded-2xl bg-pally-brown-dark sm:flex sm:items-stretch">
           <div className="relative aspect-[16/9] w-full shrink-0 sm:aspect-auto sm:w-60 md:w-72">
@@ -144,53 +174,39 @@ export default function Nallagandla() {
           </div>
         </section>
 
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <section className="rounded-2xl bg-pally-white p-5 ring-1 ring-pally-sand/70">
-            <h2 className="font-heading text-[1.25rem] leading-tight text-pally-brown-dark">
-              Eat and drink
-            </h2>
-            <p className="mt-1.5 text-[13.5px] leading-relaxed text-pally-brown-light">
-              A vegetarian kitchen with eggs, coffee poured on A2 milk, and a wood-fired oven we
-              built ourselves — the fire takes over after 5 PM.
-            </p>
-            <p className="mt-3 flex flex-wrap gap-2">
-              <a
-                href={ROUTES.menu}
-                className="inline-flex min-h-11 items-center justify-center rounded-full bg-pally-green px-5 text-[13px] font-semibold text-white transition-colors hover:bg-pally-green-dark"
-              >
-                See the menu
-              </a>
-              <Link
-                href={ROUTES.experience("eat-drink")}
-                className="inline-flex min-h-11 items-center gap-1 text-[13px] font-semibold text-pally-accent underline underline-offset-4 hover:text-pally-brown-dark"
-              >
-                Why wood-fired <span aria-hidden>→</span>
-              </Link>
-            </p>
-          </section>
+        <section className="mt-3 rounded-2xl bg-pally-white p-5 ring-1 ring-pally-sand/70">
+          <h2 className="font-heading text-[1.25rem] leading-tight text-pally-brown-dark">
+            There&rsquo;s more to do here
+          </h2>
+          <p className="mt-1.5 max-w-[62ch] text-[13.5px] leading-relaxed text-pally-brown-light">
+            Board games are there to enjoy whenever you visit. Workshops, meetups and other
+            special activities take place on scheduled dates.
+          </p>
+          <p className="mt-3">
+            <Link
+              href={ROUTES.events}
+              className="inline-flex min-h-11 items-center gap-1 rounded-full border-2 border-pally-brown px-5 text-[13px] font-semibold text-pally-brown transition-colors hover:gap-2 hover:bg-pally-brown hover:text-white"
+            >
+              Explore activities <span aria-hidden>→</span>
+            </Link>
+          </p>
+        </section>
+      </V4Section>
 
-          <section className="rounded-2xl bg-pally-white p-5 ring-1 ring-pally-sand/70">
-            <h2 className="font-heading text-[1.25rem] leading-tight text-pally-brown-dark">
-              There&rsquo;s more to do here
-            </h2>
-            <p className="mt-1.5 text-[13.5px] leading-relaxed text-pally-brown-light">
-              Board games are there to enjoy whenever you visit. Workshops, meetups and other
-              special activities take place on scheduled dates.
-            </p>
-            <p className="mt-3">
-              <Link
-                href={ROUTES.events}
-                className="inline-flex min-h-11 items-center gap-1 rounded-full border-2 border-pally-brown px-5 text-[13px] font-semibold text-pally-brown transition-colors hover:gap-2 hover:bg-pally-brown hover:text-white"
-              >
-                Explore activities <span aria-hidden>→</span>
-              </Link>
-            </p>
-          </section>
+      {/* A few real reviews, kept quiet. */}
+      <V4Section className="bg-pally-warm/40 py-9 md:py-11">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h2 className="font-heading text-[clamp(1.4rem,5vw,2rem)] text-pally-brown-dark">
+            What people say
+          </h2>
+          <p className="text-[12px] text-pally-brown-light">From Google reviews.</p>
+        </div>
+        <div className="mt-4">
+          <Reviews />
         </div>
       </V4Section>
 
-      {/* Visiting. */}
-      <V4Section id="visiting" className="bg-pally-warm/40 py-8 scroll-mt-20 md:py-10">
+      <V4Section id="visiting" className="py-9 scroll-mt-20 md:py-11">
         <h2 className="font-heading text-[clamp(1.4rem,5vw,2rem)] text-pally-brown-dark">Visiting</h2>
         <dl className="mt-4 grid gap-x-10 gap-y-3 text-[13.5px] sm:grid-cols-2">
           <div className="flex gap-3 border-t border-pally-sand pt-3">
@@ -228,23 +244,11 @@ export default function Nallagandla() {
               Good to know
             </dt>
             <dd className="text-pally-brown-dark">
-              Pets are welcome in the backyard. No smoking anywhere.
+              A power socket at every table and free Wi-Fi. Pets are welcome in the backyard. No
+              smoking anywhere.
             </dd>
           </div>
         </dl>
-      </V4Section>
-
-      {/* The four tiles, immediately above the footer. */}
-      <V4Section id="ways" className="py-9 scroll-mt-20 md:py-12">
-        <h2 className="font-heading text-[clamp(1.5rem,5vw,2.2rem)] text-pally-brown-dark">
-          Four ways to make the day yours
-        </h2>
-        <p className="mt-1.5 max-w-[56ch] text-[13.5px] text-pally-brown-light">
-          Open any one for more.
-        </p>
-        <div className="mt-5">
-          <ExpandableTiles tiles={NALLAGANDLA_TILES} />
-        </div>
       </V4Section>
 
       <V4Footer />
