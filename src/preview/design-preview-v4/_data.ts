@@ -102,22 +102,26 @@ export const MINI = {
     { label: "Wood-fired pizza", value: "From 5 PM, when the fire is hot" },
   ],
   /**
-   * The venue Mini sits inside, and the neighbouring business.
+   * What else is behind the same gate.
    *
-   * Neither is linked. No official Pickleball Central website exists anywhere in this
-   * project — only third-party listings — and the Nail Studio site is still being built.
-   * The brief is explicit that a guessed domain is worse than no link, so these stay as
-   * plain names until a verified URL arrives. Dropping one in is a one-line change here.
+   * These were written as disclaimers — "theirs, not ours", "we cannot speak for its
+   * hours" — which read as the café holding its neighbours at arm's length. They share
+   * owners, and the booklet's own line is "Play, eat, shine, all behind the same gate",
+   * so the copy now points visitors towards them instead of away.
+   *
+   * Still no links: no official Pickleball Central site exists in this project and the
+   * Nail Studio's is being built. A guessed domain is worse than none, so a URL dropped
+   * into `href` is all that is needed later.
    */
   neighbours: [
     {
       name: "Pickleball Central",
-      note: "The venue Mini sits inside. Court bookings, timings and facilities are theirs, not ours — please check with them directly.",
+      note: "The courts Mini sits beside. Book a game, then pull up a chair.",
       href: null as string | null, // TODO: official website, once supplied
     },
     {
       name: "Nail Studio by Sahithi",
-      note: "Next door, and a separate business. Quick glam between games. Mentioned to help you find your way — we cannot speak for its services or hours.",
+      note: "Next door. Quick glam between games.",
       href: null as string | null, // TODO: website is still being developed
     },
   ],
