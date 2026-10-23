@@ -43,13 +43,14 @@
       "usedAt": "/design-preview-v2/{warm-clay|garden-shade|slow-morning}/mini — 'What Mini is' section"
     },
     {
-      "file": "mini-kiosk-golden-hour.png",
+      "file": "mini-kiosk-golden-hour.jpg",
       "ratio": "~16/9",
       "bytes": 2653115,
       "shows": "A compact wooden café kiosk at golden hour, wrapped in greenery, with small outdoor tables and chairs, and a pickleball court behind it.",
       "provenance": "Supplied by PG, 2026-10-21. AI-generated. Not a photograph of Mini Alley Pally.",
       "usedAt": "/design-preview-v4/mini — atmospheric supporting image, labelled on screen",
-      "mustBeLabelled": true
+      "mustBeLabelled": true,
+      "derivedForPublishing": "Re-encoded from the supplied 2.65 MB PNG to a 287 KB JPEG and capped at 1600px on the long edge, for a public preview reviewed on phones. Same image, fewer bytes. The original PNG is in the main Alley Pally project."
     }
   ],
   "thirdAssetSkipped": "A wider contextual view (Mini near the courts and the nail studio) was not produced. It would have had to invent the venue's actual layout and the nail studio's frontage, which adds no information the two assets above do not already give. Flagged for the real shoot instead.",

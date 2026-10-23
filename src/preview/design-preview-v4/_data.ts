@@ -266,7 +266,7 @@ export const DRONE = {
  * full accuracy caveats are in public/preview-concepts/mini/manifest.json.
  */
 export const MINI_ARTWORK = {
-  src: "/preview-concepts/mini/mini-kiosk-golden-hour.png",
+  src: "/preview-concepts/mini/mini-kiosk-golden-hour.jpg",
   alt: "Concept illustration: a small wooden café kiosk wrapped in greenery at golden hour, with outdoor tables and a pickleball court behind it",
   label: "Illustration · not a photograph",
 };
