@@ -31,6 +31,14 @@ export const ROUTES = {
   experience: (slug: string) => `/experience/${slug}`,
   /** The live menu, deliberately: printed QR codes depend on it. */
   menu: `${LIVE_SITE}/menu`,
+  /**
+   * Mini's menu lives inside this preview, because it does not exist anywhere public yet.
+   * Nallagandla's stays on the live site above — one copy of that data, not two.
+   *
+   * The base path is written in because every use of this is a plain <a href>, which Next
+   * does not prefix the way it does a <Link>. If it is ever used with Link, drop it.
+   */
+  miniMenu: `${BASE_PATH}/mini/menu`,
   library: `${LIVE_SITE}/library`,
   about: `${LIVE_SITE}/about`,
   privacy: `${LIVE_SITE}/privacy`,

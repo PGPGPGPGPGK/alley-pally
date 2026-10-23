@@ -68,7 +68,59 @@ const BLURB: Record<V3Location["slug"], string> = {
 
 export const LOCATIONS: Record<V3Location["slug"], V3Location & { blurb: string }> = {
   nallagandla: { ...V3_LOCATIONS.nallagandla, blurb: BLURB.nallagandla },
-  mini: { ...V3_LOCATIONS.mini, blurb: BLURB.mini },
+  mini: {
+    ...V3_LOCATIONS.mini,
+    blurb: BLURB.mini,
+    /**
+     * Confirmed by the October 2026 Mini booklet, which states "Café 7 AM – 11 PM · Fire
+     * from 5 PM" on its closing page. These are the café's opening hours, not its service
+     * windows: breakfast runs 7–11:30 AM and wood-fired pizza starts at 5 PM, and those
+     * belong on the menu rather than here.
+     */
+    hours: "Daily · 7:00 AM – 11:00 PM",
+    hoursVerified: true,
+    hoursNote: undefined,
+    /** Mini now has a menu of its own, and it is not Nallagandla's. */
+    menuHref: "/mini/menu",
+  },
+};
+
+/**
+ * Mini's own positioning, in the booklet's words rather than ours.
+ *
+ * Nallagandla is "Not a café. A place to be." Mini is the express cousin: same spirit,
+ * court-side, at speed. Service windows are listed separately from opening hours because
+ * conflating them is the easiest way to send someone for pizza at breakfast.
+ */
+export const MINI = {
+  tagline: "Not a café. A pit stop.",
+  rhythm: "Play · Pause · Sip · Repeat",
+  what: "An express café inside Pickleball Central — a tight counter doing a few things properly. Real beans, no powder. A wood-fired oven for pizza after five. Loaded bites, maggi, shakes and rice bowls that travel the ten steps back to your court while they are still hot.",
+  hours: [
+    { label: "Café", value: "7:00 AM – 11:00 PM, daily" },
+    { label: "Breakfast", value: "7:00 – 11:30 AM" },
+    { label: "Wood-fired pizza", value: "From 5 PM, when the fire is hot" },
+  ],
+  /**
+   * The venue Mini sits inside, and the neighbouring business.
+   *
+   * Neither is linked. No official Pickleball Central website exists anywhere in this
+   * project — only third-party listings — and the Nail Studio site is still being built.
+   * The brief is explicit that a guessed domain is worse than no link, so these stay as
+   * plain names until a verified URL arrives. Dropping one in is a one-line change here.
+   */
+  neighbours: [
+    {
+      name: "Pickleball Central",
+      note: "The venue Mini sits inside. Court bookings, timings and facilities are theirs, not ours — please check with them directly.",
+      href: null as string | null, // TODO: official website, once supplied
+    },
+    {
+      name: "Nail Studio by Sahithi",
+      note: "Next door, and a separate business. Quick glam between games. Mentioned to help you find your way — we cannot speak for its services or hours.",
+      href: null as string | null, // TODO: website is still being developed
+    },
+  ],
 };
 
 export const LOCATION_LIST = [LOCATIONS.nallagandla, LOCATIONS.mini];
@@ -101,6 +153,40 @@ const KEEP_NOTES: Partial<Record<Experience["slug"], string[]>> = {
   ],
 };
 
+/**
+ * Gallery curation, applied to every journey.
+ *
+ * Two faults were baked into the inherited data. The hero photograph also appears as the
+ * first gallery thumbnail, so every page showed the same picture twice; and Play's gallery
+ * had `live-events.jpg` listed once in the base data and appended a second time by the
+ * theme override, so it was a literal duplicate. Removing the hero and de-duplicating by
+ * src fixes both at the source instead of at each render site.
+ */
+function curateGallery(hero: string, gallery: { src: string; alt: string }[]) {
+  const seen = new Set<string>([hero]);
+  return gallery.filter((g) => !seen.has(g.src) && seen.add(g.src));
+}
+
+/**
+ * Play shows three, chosen rather than inherited: the board-game night, a full table of
+ * guests, and a session in the orange room. The music photographs that used to pad this
+ * gallery belong to Sunday music on the Nallagandla page, not to Play.
+ */
+const PLAY_GALLERY = [
+  {
+    src: "/images/gallery/7.jpg",
+    alt: "A board game night at Alley Pally: guests around the long table holding cards, with game pieces between them",
+  },
+  {
+    src: "/images/reels/DZTA3ibzVwE.jpg",
+    alt: "A full table of friends at Alley Pally, mid-evening",
+  },
+  {
+    src: "/images/experience-event.jpg",
+    alt: "A group session in the orange room at Alley Pally",
+  },
+];
+
 // Built field by field rather than by spreading: `manners` is dropped by simply never
 // being copied, which is easier to verify than a rest-destructure.
 export const EXPERIENCES: V4Experience[] = V3_EXPERIENCES.map((e) => ({
@@ -110,7 +196,7 @@ export const EXPERIENCES: V4Experience[] = V3_EXPERIENCES.map((e) => ({
   blurb: clean(e.blurb),
   hero: e.hero,
   corners: e.corners.map((c) => ({ ...c, body: clean(c.body) })),
-  gallery: e.gallery,
+  gallery: e.slug === "play" ? PLAY_GALLERY : curateGallery(e.hero.src, e.gallery),
   cta: e.cta,
   notes: KEEP_NOTES[e.slug],
 }));
@@ -164,6 +250,8 @@ export type NallagandlaTile = {
   suitedFor?: string;
   body: string[];
   image: { src: string; alt: string };
+  /** CSS object-position, for photographs whose subject is not in the centre. */
+  focal?: string;
   link?: { label: string; href: string };
 };
 
@@ -194,8 +282,18 @@ export const NALLAGANDLA_TILES: NallagandlaTile[] = [
     ],
     image: {
       src: "/images/gallery/7.jpg",
-      alt: "Guests around the long table at Alley Pally, talking in the daylight by the window",
+      alt: "A board game night at Alley Pally: guests around the long table holding cards, with game pieces and drinks between them",
     },
+    /**
+     * A portrait photograph in a landscape tile. The players and the table sit above
+     * centre, so the crop is pulled up rather than taking the middle band, which would
+     * have been mostly tabletop.
+     *
+     * This is also the photograph that was hiding behind an EXIF orientation bug: stored
+     * landscape, tagged "rotate 90", it rendered sideways and read as an unrelated group
+     * shot. Corrected, it is the board-game picture the Game Room always needed.
+     */
+    focal: "center 34%",
     link: { label: "More about playing here", href: ROUTES.experience("play") },
   },
   {
@@ -365,16 +463,45 @@ export const FOOD = {
   headline: "Come for the company. Stay for another slice.",
   body:
     "We did not build Alley Pally to serve food. But while you are here, we would love to make you something good — a vegetarian kitchen with eggs, coffee on A2 milk, and a wood-fired oven we built ourselves.",
-  lead: {
-    src: "/images/gallery/3.jpg",
-    alt: "A latte and a pastry on a dark tray, on one of the wooden tables at Alley Pally",
-  },
-  /** Verified against the current menu: bagels, subs, pesto, salads and coffee all appear. */
-  dishes: [
-    { src: "/images/food/pesto-sub.jpg", alt: "An open pesto sub on a dark plate" },
-    { src: "/images/food/sub.jpg", alt: "A toasted sub with fries and dips" },
-    { src: "/images/food/bagel.jpg", alt: "A filled bagel" },
-    { src: "/images/food/salad.jpg", alt: "A bowl of salad" },
+  /**
+   * The gallery, every dish checked against src/lib/menu-data.ts before it was included.
+   *
+   * `food/hotdog.jpg` is deliberately absent: there is no hot dog on the approved menu, so
+   * it would have been an outdated offering. There is still no photograph of the wood-fired
+   * pizza anywhere in the repository, which is flagged rather than filled with a stand-in.
+   *
+   * The lead is the one with warmth in it rather than a white studio background. Its pastry
+   * is not named, because no croissant appears on the current menu either.
+   */
+  gallery: [
+    {
+      src: "/images/gallery/3.jpg",
+      alt: "A latte and a pastry on a dark tray, on one of the wooden tables at Alley Pally",
+      caption: "Coffee, poured on A2 milk.",
+    },
+    { src: "/images/food/latte.jpg", alt: "A latte in a cup", caption: "A latte." },
+    { src: "/images/food/pesto-sub.jpg", alt: "An open pesto sub on a dark plate", caption: "The pesto sub." },
+    { src: "/images/food/sub.jpg", alt: "A toasted sub with fries and dips", caption: "A toasted sub, with fries." },
+    { src: "/images/food/bagel.jpg", alt: "A filled bagel", caption: "A bagel." },
+    { src: "/images/food/salad.jpg", alt: "A bowl of salad", caption: "The Caesar salad." },
+    { src: "/images/food/drink.jpg", alt: "A tall iced cooler with lime and mint", caption: "Something cold." },
+    /**
+     * Reserved for the wood-fired pizza.
+     *
+     * Eight pizzas are on the menu and the oven is half the story of this café, but there
+     * is no photograph of either anywhere in the repository. Rather than borrow a stock
+     * image or quietly leave the gap, the gallery holds an empty frame that says what is
+     * missing.
+     *
+     * To fill it: save the photograph as `public/images/food/wood-fired-pizza.jpg` and
+     * delete the `pending` line below. Nothing else needs to change.
+     */
+    {
+      src: "/images/food/wood-fired-pizza.jpg",
+      alt: "Wood-fired pizza at Alley Pally",
+      caption: "Wood-fired pizza, from the oven we built ourselves.",
+      pending: "Wood-fired pizza",
+    },
   ],
 };
 

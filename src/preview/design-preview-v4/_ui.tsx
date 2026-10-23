@@ -414,9 +414,15 @@ export function V4Footer() {
                   Events
                 </Link>
               </li>
+              {/* Two cafés, two booklets — a bare "Menu" link would be a coin toss. */}
               <li>
                 <a href={ROUTES.menu} className="hover:underline">
-                  Menu
+                  Menu · Nallagandla
+                </a>
+              </li>
+              <li>
+                <a href={ROUTES.miniMenu} className="hover:underline">
+                  Menu · Mini
                 </a>
               </li>
             </ul>

@@ -58,6 +58,7 @@ function ExpandableTile({ tile }: { tile: NallagandlaTile }) {
               alt={tile.image.alt}
               fill
               sizes="(max-width: 768px) 100vw, 520px"
+              style={tile.focal ? { objectPosition: tile.focal } : undefined}
               className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
             />
           </span>

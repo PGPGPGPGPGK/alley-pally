@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { Photo } from "../../design-preview/_ui";
 import { FLOORS_UNCONFIRMED, FOOD, LOCATIONS, NALLAGANDLA_TILES, STORY } from "../_data";
 import { CafeFilm } from "../_drone";
 import { V4Nav } from "../_nav";
 import { ROUTES } from "../_routes";
+import { ImageGallery } from "../_gallery";
 import { ExpandableTiles } from "../_tiles";
 import { QuickActions, Reviews, V4Footer, V4Section, V4Strip } from "../_ui";
 
@@ -127,20 +127,8 @@ export default function Nallagandla() {
               See the menu
             </a>
           </div>
-          <figure>
-            <Photo src={FOOD.lead.src} alt={FOOD.lead.alt} ratio="4/3" />
-          </figure>
+          <ImageGallery images={FOOD.gallery} label="Food and coffee at Alley Pally" />
         </div>
-
-        <ul className="mt-5 grid grid-cols-4 gap-2 sm:gap-3">
-          {FOOD.dishes.map((d) => (
-            <li key={d.src}>
-              <div className="relative aspect-square overflow-hidden rounded-xl bg-pally-white ring-1 ring-pally-sand/70">
-                <Image src={d.src} alt={d.alt} fill sizes="(max-width: 640px) 25vw, 160px" className="object-cover" />
-              </div>
-            </li>
-          ))}
-        </ul>
       </V4Section>
 
       {/* Sunday music gets its own highlight: it is the one recurring thing. */}

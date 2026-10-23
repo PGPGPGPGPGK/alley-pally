@@ -41,6 +41,16 @@ const FILES = [
   ["src/app/design-preview-v4/hearth/page.tsx", "src/preview/design-preview-v4/hearth/page.tsx"],
   ["src/app/design-preview-v4/nallagandla/page.tsx", "src/preview/design-preview-v4/nallagandla/page.tsx"],
   ["src/app/design-preview-v4/mini/page.tsx", "src/preview/design-preview-v4/mini/page.tsx"],
+  ["src/app/design-preview-v4/_gallery.tsx", "src/preview/design-preview-v4/_gallery.tsx"],
+  // Mini's digital menu. Nallagandla's menu is NOT copied here: it already exists on the
+  // live site and the preview links out to it, so there is one copy of that data, not two.
+  ["src/components/sections/Menu.tsx", "src/components/sections/Menu.tsx"],
+  ["src/components/ui/ScrollReveal.tsx", "src/components/ui/ScrollReveal.tsx"],
+  ["src/components/ui/Button.tsx", "src/components/ui/Button.tsx"],
+  ["src/components/ui/Decorations.tsx", "src/components/ui/Decorations.tsx"],
+  ["src/lib/menu-data.ts", "src/lib/menu-data.ts"],
+  ["src/lib/menu-data-mini.ts", "src/lib/menu-data-mini.ts"],
+  ["src/lib/menu-config.ts", "src/lib/menu-config.ts"],
 ];
 
 for (const [from, to] of FILES) {
@@ -98,6 +108,20 @@ await patch("src/preview/design-preview-v4/_drone.tsx", [
   ['import { usePrefersReducedMotion } from "./_motion";',
    'import { usePrefersReducedMotion } from "./_motion";\nimport { BASE_PATH } from "./_routes";'],
   ["poster={FILM.poster}", "poster={`${BASE_PATH}${FILM.poster}`}"],
+]);
+
+// 3b. The booklet links are plain anchors, which Next does not prefix with the base path
+//     the way it does for Link and Image. Both are made base-path aware here.
+await patch("src/lib/menu-config.ts", [
+  ['url: "/menus/alley-pally-nallagandla.pdf"', 'url: `${BASE_PATH}/menus/alley-pally-nallagandla.pdf`'],
+  ['url: "/menus/mini-alley-pally.pdf"', 'url: `${BASE_PATH}/menus/mini-alley-pally.pdf`'],
+  // A template literal so the newline can be written literally: escape sequences do
+  // not survive the tooling that generates this file.
+  [
+    'from "./menu-data";',
+    `from "./menu-data";
+import { BASE_PATH } from "@/preview/design-preview-v4/_routes";`,
+  ],
 ]);
 
 // 4. The Mini illustration is a JPEG here; the source keeps the original PNG.
